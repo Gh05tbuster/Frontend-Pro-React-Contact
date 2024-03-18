@@ -7,7 +7,7 @@ class Contact extends Component {
         return (
             <>
                 <ContactList />
-                <ContactForm /> 
+                {/* <ContactForm />  */}
             </>
             
         );
