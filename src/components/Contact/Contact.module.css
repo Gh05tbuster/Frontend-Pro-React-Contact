@@ -1,10 +1,20 @@
 .contact {
   width: 400px;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .popupWrapper {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #555c;
+  inset: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
 }
 
 .hidden {
@@ -14,19 +24,28 @@
 .btn {
   cursor: pointer;
   background-color: #7f8591;
+  color: #fff;
+  font-weight: bold;
   min-width: 100px;
   height: 33px;
   border: none;
   border-radius: 25px;
 }
 
+.btn:hover {
+  transform: scale(1.05);
+  transition: all linear 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
 .btn.green {
-  color: #fff;
   background-color: #109f10;
 }
 
 .btn.red {
-  color: #fff;
   background-color: #9f1010;
 }
 
@@ -56,4 +75,5 @@
   border: 1px solid #aaa;
   border-radius: 25px;
   padding: 5px;
+  outline: none;
 }
