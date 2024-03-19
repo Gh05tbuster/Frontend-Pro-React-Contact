@@ -1,0 +1,59 @@
+.contact {
+  width: 400px;
+  text-align: center;
+}
+
+.popupWrapper {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+.btn {
+  cursor: pointer;
+  background-color: #7f8591;
+  min-width: 100px;
+  height: 33px;
+  border: none;
+  border-radius: 25px;
+}
+
+.btn.green {
+  color: #fff;
+  background-color: #109f10;
+}
+
+.btn.red {
+  color: #fff;
+  background-color: #9f1010;
+}
+
+.btnGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.redX {
+  cursor: pointer;
+  font-size: 32px;
+  color: #f00;
+}
+
+.contactForm {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.textInput {
+  border: 1px solid #aaa;
+  border-radius: 25px;
+  padding: 5px;
+}
