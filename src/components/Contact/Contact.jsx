@@ -88,7 +88,7 @@ class Contact extends Component {
     }
 
     handleSave() {
-        if (this.validateFirstName && this.validateLastName && this.validatePhone)
+        if (this.validateFirstName() && this.validateLastName() && this.validatePhone())
         {
             this.setState(prevState => ({
                 newContact: {
