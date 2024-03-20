@@ -56,7 +56,7 @@ class Contact extends Component {
 
     handleChange(event, marker) {
         switch(marker) {
-            case 'fn': 
+            case 'firstName': 
                 this.setState(prevState => ({
                     newContact: {
                         ...prevState.newContact,
@@ -65,7 +65,7 @@ class Contact extends Component {
                 })); 
             break;
 
-            case 'ln': 
+            case 'lastName': 
                 this.setState(prevState => ({
                     newContact: {
                         ...prevState.newContact,
@@ -74,7 +74,7 @@ class Contact extends Component {
                 })); 
             break;
 
-            case 'phn': 
+            case 'phone': 
                 this.setState(prevState => ({
                     newContact: {
                         ...prevState.newContact,
@@ -88,9 +88,7 @@ class Contact extends Component {
     }
 
     handleSave() {
-        if (this.state.newContact.firstName)
-        if (this.state.newContact.lastName)
-        if (this.state.newContact.phone)
+        if (this.validateFirstName && this.validateLastName && this.validatePhone)
         {
             this.setState(prevState => ({
                 newContact: {
@@ -111,13 +109,25 @@ class Contact extends Component {
         }
     }
 
+    validateFirstName() {
+        if (this.state.newContact.firstName) return true;
+    }
+
+    validateLastName() {
+        if (this.state.newContact.lastName) return true;
+    }
+
+    validatePhone() {
+        if (this.state.newContact.phone) return true;
+    }
+
     handleCancel() {
         this.setState({formHidden: true});
     }
 
     render () {
         return (
-            <div className={`${style.contact}`}>
+            <div className={style.contact}>
                 <table className="contactTable">
                     <tbody>
                         {this.state.contacts.map(contact => (
@@ -125,38 +135,38 @@ class Contact extends Component {
                                 <td>{contact.firstName}</td>
                                 <td>{contact.lastName}</td>
                                 <td>{contact.phone}</td>
-                                <td className={`${style.redX}`} onClick={() => this.handleDeleteRow(contact.id)}>×</td>
+                                <td className={style.redX} onClick={() => this.handleDeleteRow(contact.id)}>×</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
 
-                <button className={`${style.btn}`} onClick={this.handleShowForm}>Add contact</button>
+                <button className={style.btn} onClick={this.handleShowForm}>Add contact</button>
 
                     <div className={`${this.state.formHidden ? style.hidden : ''} ${style.popupWrapper}`}>
-                    <div className={`${style.contactForm}`}>
+                    <div className={style.contactForm}>
                         <input 
                             type="text" 
                             placeholder="First name" 
-                            onChange={(event) => this.handleChange(event,'fn')} 
+                            onChange={(event) => this.handleChange(event,'firstName')} 
                             value={this.state.newContact.firstName}
-                            className={`${style.textInput}`}
+                            className={style.textInput}
                         />
                         <input 
                             type="text" 
                             placeholder="Last name" 
-                            onChange={(event) => this.handleChange(event, 'ln')} 
+                            onChange={(event) => this.handleChange(event, 'lastName')} 
                             value={this.state.newContact.lastName}
-                            className={`${style.textInput}`}
+                            className={style.textInput}
                         />
                         <input 
                             type="text" 
                             placeholder="Phone number" 
-                            onChange={(event) => this.handleChange(event, 'phn')} 
+                            onChange={(event) => this.handleChange(event, 'phone')} 
                             value={this.state.newContact.phone}
-                            className={`${style.textInput}`}
+                            className={style.textInput}
                         />
-                        <div className={`${style.btnGroup}`}>
+                        <div className={style.btnGroup}>
                             <button type="button" className={`${style.btn} ${style.green}`} onClick={this.handleSave}>Save</button>
                             <button type="button" className={`${style.btn} ${style.red}`} onClick={this.handleCancel}>Cancel</button>
                         </div>
