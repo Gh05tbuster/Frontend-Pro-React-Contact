@@ -22,13 +22,13 @@ class ContactList extends Component {
                 <table className="contactTable">
                     <tbody>
                         {this.contacts.map(contact => (
-                            <tr key={contact.id}>
-                            <td>{contact.firstName}</td>
-                            <td>{contact.lastName}</td>
-                            <td>{contact.phone}</td>
-                            <td className={style.redX} onClick={() => this.deleteRow(contact.id)}>×</td>
-                        </tr>
-                            // <ContactRecord contact={contact} handleDeleteRow={this.deleteRow}/>
+                        // <tr key={contact.id}>
+                        //     <td>{contact.firstName}</td>
+                        //     <td>{contact.lastName}</td>
+                        //     <td>{contact.phone}</td>
+                        //     <td className={style.redX} onClick={() => this.deleteRow(contact.id)}>×</td>
+                        // </tr>
+                            <ContactRecord contact={contact} handleDeleteRow={this.deleteRow}/>
                         ))}
                     </tbody>
                 </table>
