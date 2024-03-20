@@ -1,4 +1,6 @@
 import { Component } from "react";
+import ContactList from "../ContactList/ContactList";
+import ContactForm from "../ContactForm/ContactForm";
 import style from './Contact.module.css';
 class Contact extends Component {
     constructor(props) {
@@ -7,26 +9,16 @@ class Contact extends Component {
         this.state ={
             contacts: [],
             idCount: 0,
-            newContact: {
-                id: '',
-                firstName: '',
-                lastName: '',
-                phone: ''
-            },
-            formHidden: true
         }
 
-        this.handleDeleteRow = this.handleDeleteRow.bind(this);
-        this.handleShowForm = this.handleShowForm.bind(this);
-        this.handleSave = this.handleSave.bind(this);
-        this.handleCancel = this.handleCancel.bind(this);
+        this.addContact = this.addContact.bind(this);
+        this.deleteContact = this.deleteContact.bind(this);
     }
 
     componentDidMount() {
         fetch('https://jsonplaceholder.typicode.com/users')
         .then(res => res.json())
         .then(res => {
-            const arr =[];
             res.forEach(contact => {
                 const obj = {
                     id: contact.id,
@@ -34,145 +26,35 @@ class Contact extends Component {
                     lastName: contact.name.split(' ')[1],
                     phone: contact.phone
                 }
-                arr.push(obj);
-            });
-            return arr;
-        })
-        .then(res => {
-            this.setState({
-                contacts: res,
-                idCount: res.length
+                this.addContact(obj);
             });
         })
     }
 
-    handleDeleteRow(id) {
+    // increaseIdCount(n) {
+    //     this.setState({idCount: this.state.idCount + n})
+    // }
+
+    addContact(newContact) {
+        this.setState({idCount: this.state.idCount+1});
+        this.setState({contacts: [...this.state.contacts, newContact]})
+        // this.setState(prevState => ({
+        //     idCount: prevState.idCount + 1,
+        //     contacts: [...prevState.contacts, newContact]
+        // }));
+    }
+
+    deleteContact(id) {
+        console.log(this.state.contacts.filter(el => el.id !== id));
         this.setState({contacts: this.state.contacts.filter(el => el.id !== id)})
     }
 
-    handleShowForm() {
-        this.setState({formHidden: false});
-    }
-
-    handleChange(event, marker) {
-        switch(marker) {
-            case 'firstName': 
-                this.setState(prevState => ({
-                    newContact: {
-                        ...prevState.newContact,
-                        firstName: event.target.value
-                    }
-                })); 
-            break;
-
-            case 'lastName': 
-                this.setState(prevState => ({
-                    newContact: {
-                        ...prevState.newContact,
-                        lastName: event.target.value
-                    }
-                })); 
-            break;
-
-            case 'phone': 
-                this.setState(prevState => ({
-                    newContact: {
-                        ...prevState.newContact,
-                        phone: event.target.value
-                    }
-                })); 
-            break;
-
-            default: break;
-        }
-    }
-
-    handleSave() {
-        if (this.validateFirstName && this.validateLastName && this.validatePhone)
-        {
-            this.setState(prevState => ({
-                newContact: {
-                ...prevState.newContact,
-                id: this.state.idCount+1
-                }
-            })); 
-            this.setState({idCount: this.state.idCount+1})
-            this.setState({contacts: [...this.state.contacts, this.state.newContact]})
-            this.setState({formHidden: true});
-            this.setState({
-                newContact: {
-                    firstName: '',
-                    lastName: '',
-                    phone: ''
-                },
-            })
-        }
-    }
-
-    validateFirstName() {
-        if (this.state.newContact.firstName) return true;
-    }
-
-    validateLastName() {
-        if (this.state.newContact.lastName) return true;
-    }
-
-    validatePhone() {
-        if (this.state.newContact.phone) return true;
-    }
-
-    handleCancel() {
-        this.setState({formHidden: true});
-    }
-
-    render () {
+    render() {
         return (
-            <div className={style.contact}>
-                <table className="contactTable">
-                    <tbody>
-                        {this.state.contacts.map(contact => (
-                            <tr key={contact.id}>
-                                <td>{contact.firstName}</td>
-                                <td>{contact.lastName}</td>
-                                <td>{contact.phone}</td>
-                                <td className={style.redX} onClick={() => this.handleDeleteRow(contact.id)}>×</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-
-                <button className={style.btn} onClick={this.handleShowForm}>Add contact</button>
-
-                    <div className={`${this.state.formHidden ? style.hidden : ''} ${style.popupWrapper}`}>
-                    <div className={style.contactForm}>
-                        <input 
-                            type="text" 
-                            placeholder="First name" 
-                            onChange={(event) => this.handleChange(event,'firstName')} 
-                            value={this.state.newContact.firstName}
-                            className={style.textInput}
-                        />
-                        <input 
-                            type="text" 
-                            placeholder="Last name" 
-                            onChange={(event) => this.handleChange(event, 'lastName')} 
-                            value={this.state.newContact.lastName}
-                            className={style.textInput}
-                        />
-                        <input 
-                            type="text" 
-                            placeholder="Phone number" 
-                            onChange={(event) => this.handleChange(event, 'phone')} 
-                            value={this.state.newContact.phone}
-                            className={style.textInput}
-                        />
-                        <div className={style.btnGroup}>
-                            <button type="button" className={`${style.btn} ${style.green}`} onClick={this.handleSave}>Save</button>
-                            <button type="button" className={`${style.btn} ${style.red}`} onClick={this.handleCancel}>Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <>
+                <ContactList contacts={this.state.contacts} deleteContact={this.deleteContact} />
+                <ContactForm currentId={this.state.idCount} addContact={this.addContact}/>
+            </>
         );
     }
 }
