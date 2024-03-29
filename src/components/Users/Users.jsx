@@ -28,7 +28,7 @@ const Users = () => {
     })
 
     return (
-        <BrowserRouter>
+        <>
             <div className="userList">
                 <Link to='/'>Back</Link>
                 <ul>
@@ -53,7 +53,7 @@ const Users = () => {
                     </Route>
                 </Switch>
             </div>
-        </BrowserRouter>
+        </>
     );
 }
 

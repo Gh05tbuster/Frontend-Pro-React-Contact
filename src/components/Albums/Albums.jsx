@@ -25,11 +25,11 @@ const Albums = ({userId}) => {
                 arr.push(obj);
             })
             setAlbumList(arr);
-        }, [userId]) 
+        }, []) 
     })
 
     return (
-        <BrowserRouter>
+        <>
             <div className="albumList">
                 <ul>
                     {albumList.map(album => (
@@ -53,7 +53,7 @@ const Albums = ({userId}) => {
                     </Route>
                 </Switch>
             </div>
-        </BrowserRouter>
+        </>
     );
 }
 
