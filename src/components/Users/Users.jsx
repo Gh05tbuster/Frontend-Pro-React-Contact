@@ -48,6 +48,7 @@ const Users = () => {
                     <Route path={`/${currentUserId}/albums`}>
                         <Albums userId={currentUserId}/>
                     </Route>
+                    
                     <Route path='/'>
                     </Route>
                 </Switch>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-const Photos = ({userId, albumId}) => {
+const Photos = ({albumId}) => {
     const [photosList, setPhotosList] = useState([]);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ const Photos = ({userId, albumId}) => {
         }, [albumId])
     })
 
-    return (<div>
+    return (<div className="photosList">
         {photosList.map(photo => (
             <img key={photo.id} src={`${photo.thumbnailUrl}`} alt=""/>
         ))}

@@ -25,34 +25,34 @@ const Albums = ({userId}) => {
                 arr.push(obj);
             })
             setAlbumList(arr);
-        }, []) 
+        }, [userId]) 
     })
 
     return (
         <BrowserRouter>
-            <div className="userList">
+            <div className="albumList">
                 <ul>
-                {albumList.map(album => (
-                    <li key={album.id}>
-                        <div>{album.name}</div>
-                        <div onClick={() => {setCurrentAlbumId(album.id)}}>
-                            <Link to={`/${userId}/albums/${album.id}`}>Photos</Link>
-                        </div>
-                    </li>
-                ))}
+                    {albumList.map(album => (
+                        <li key={album.id}>
+                            <div>{album.name}</div>
+                            <div onClick={() => {setCurrentAlbumId(album.id)}}>
+                                <Link to={`/${userId}/albums/${album.id}`}>Photos</Link>
+                            </div>
+                        </li>
+                    ))}
                 </ul>
             </div>
 
             <div className="photos">
-                            <Switch>
-                                <Route path={`/${userId}/albums/${currentAlbumId}`}>
-                                    <Photos userId={userId} albumId={currentAlbumId}/>
-                                </Route>
+                <Switch>
+                    <Route path={`/${userId}/albums/${currentAlbumId}`}>
+                        <Photos albumId={currentAlbumId}/>
+                    </Route>
 
-                                <Route Route path='/'>
-                                </Route>
-                            </Switch>
-                        </div>
+                    <Route Route path='/'>
+                    </Route>
+                </Switch>
+            </div>
         </BrowserRouter>
     );
 }
