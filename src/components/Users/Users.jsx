@@ -24,8 +24,8 @@ const Users = () => {
                 arr.push(obj);
             })
             setUserList(arr);
-        }, []) 
-    })
+        }) 
+    }, [])
 
     return (
         <>

@@ -25,8 +25,8 @@ const Albums = ({userId}) => {
                 arr.push(obj);
             })
             setAlbumList(arr);
-        }, []) 
-    })
+        }) 
+    }, [userId])
 
     return (
         <>

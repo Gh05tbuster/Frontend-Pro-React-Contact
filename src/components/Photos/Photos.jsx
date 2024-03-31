@@ -18,8 +18,8 @@ const Photos = ({albumId}) => {
                 arr.push(obj);
             })
             setPhotosList(arr);
-        }, [albumId])
-    })
+        })
+    }, [albumId])
 
     return (<div className="photosList">
         {photosList.map(photo => (
