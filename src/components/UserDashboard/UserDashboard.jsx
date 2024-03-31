@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Users from "../Users/Users";
 import Albums from "../Albums/Albums";
