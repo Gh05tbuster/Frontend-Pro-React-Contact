@@ -1,9 +1,9 @@
 import './App.css';
-import Users from './components/Users/Users';
+import UserDashboard from './components/UserDashboard/UserDashboard';
 
 function App() {
   return (
-    <Users />
+    <UserDashboard />
   );
 }
 

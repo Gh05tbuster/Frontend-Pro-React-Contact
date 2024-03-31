@@ -1,17 +1,16 @@
 import React, {useEffect, useState} from "react";
-import {
-    BrowserRouter,
-    Switch,
-    Route,
-    Link,
-} from 'react-router-dom';
-import Albums from "../Albums/Albums";
+import { Link } from 'react-router-dom';
 
 const Users = () => {
     const [userList, setUserList] = useState([]);
     const [currentUserId, setCurrentUserId] = useState(0);
 
     useEffect(()=>{
+        // const fetchData = async () => {
+        //     const res = await fetch('https://jsonplaceholder.typicode.com/users');
+        //     const json = res.json();
+        //     setUserList(json);
+        // }
         fetch('https://jsonplaceholder.typicode.com/users')
         .then(res => res.json())
         .then(res => {
@@ -24,8 +23,8 @@ const Users = () => {
                 arr.push(obj);
             })
             setUserList(arr);
-        }, []) 
-    })
+        }) 
+    }, [])
 
     return (
         <>
@@ -34,16 +33,14 @@ const Users = () => {
                 <ul>
                 {userList.map(user => (
                     <li key={user.id}>
-                        <div>{user.name}</div>
-                        <div onClick={() => {setCurrentUserId(user.id)}}>
-                            <Link to={`/${user.id}/albums`}>Albums</Link>
-                        </div>
+                        <p>{user.name}</p>
+                        <Link to={`/${user.id}/albums`}>Albums</Link>
                     </li>
                 ))}
                 </ul>
             </div>
 
-            <div className="userAlbums">
+            {/* <div className="userAlbums">
                 <Switch>
                     <Route path={`/${currentUserId}/albums`}>
                         <Albums userId={currentUserId}/>
@@ -52,7 +49,7 @@ const Users = () => {
                     <Route path='/'>
                     </Route>
                 </Switch>
-            </div>
+            </div> */}
         </>
     );
 }

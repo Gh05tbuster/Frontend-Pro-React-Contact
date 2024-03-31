@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useParams} from "react";
 import {
     BrowserRouter,
     Switch,
@@ -7,7 +7,8 @@ import {
 } from 'react-router-dom';
 import Photos from "../Photos/Photos";
 
-const Albums = ({userId}) => {
+const Albums = () => {
+    const { userId } = useParams();
 
     const [albumList, setAlbumList] = useState([]);
     const [currentAlbumId, setCurrentAlbumId] = useState(0);
@@ -25,8 +26,8 @@ const Albums = ({userId}) => {
                 arr.push(obj);
             })
             setAlbumList(arr);
-        }, []) 
-    })
+        }) 
+    }, [userId])
 
     return (
         <>
@@ -34,7 +35,7 @@ const Albums = ({userId}) => {
                 <ul>
                     {albumList.map(album => (
                         <li key={album.id}>
-                            <div>{album.name}</div>
+                            <p>{album.name}</p>
                             <div onClick={() => {setCurrentAlbumId(album.id)}}>
                                 <Link to={`/${userId}/albums/${album.id}`}>Photos</Link>
                             </div>
@@ -43,7 +44,7 @@ const Albums = ({userId}) => {
                 </ul>
             </div>
 
-            <div className="photos">
+            {/* <div className="photos">
                 <Switch>
                     <Route path={`/${userId}/albums/${currentAlbumId}`}>
                         <Photos albumId={currentAlbumId}/>
@@ -52,7 +53,7 @@ const Albums = ({userId}) => {
                     <Route Route path='/'>
                     </Route>
                 </Switch>
-            </div>
+            </div> */}
         </>
     );
 }

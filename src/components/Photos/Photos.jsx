@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useParams} from "react";
 
-const Photos = ({albumId}) => {
+const Photos = () => {
+    const { albumId } = useParams();
     const [photosList, setPhotosList] = useState([]);
 
     useEffect(() => {
@@ -18,12 +19,12 @@ const Photos = ({albumId}) => {
                 arr.push(obj);
             })
             setPhotosList(arr);
-        }, [albumId])
-    })
+        })
+    }, [albumId])
 
     return (<div className="photosList">
         {photosList.map(photo => (
-            <img key={photo.id} src={`${photo.thumbnailUrl}`} alt=""/>
+            <img key={photo.id} src={photo.thumbnailUrl} alt={photo.title}/>
         ))}
         
     </div>);
