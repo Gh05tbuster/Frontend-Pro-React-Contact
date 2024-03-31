@@ -1,50 +1,55 @@
-import React, {useEffect, useState, useParams} from "react";
+import React, { useEffect, useState } from "react";
 import {
-    BrowserRouter,
-    Switch,
-    Route,
-    Link,
-} from 'react-router-dom';
+  BrowserRouter,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 import Photos from "../Photos/Photos";
 
 const Albums = () => {
-    const { userId } = useParams();
+  const { userId } = useParams();
 
-    const [albumList, setAlbumList] = useState([]);
-    const [currentAlbumId, setCurrentAlbumId] = useState(0);
+  const [albumList, setAlbumList] = useState([]);
+  const [currentAlbumId, setCurrentAlbumId] = useState(0);
 
-    useEffect(()=>{
-        fetch(`https://jsonplaceholder.typicode.com/albums?userId=${userId}`)
-        .then(res => res.json())
-        .then(res => {
-            const arr = [];
-            res.forEach(album => {
-                const obj = {
-                    id: album.id,
-                    name: album.title
-                };
-                arr.push(obj);
-            })
-            setAlbumList(arr);
-        }) 
-    }, [userId])
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/albums?userId=${userId}`)
+      .then((res) => res.json())
+      .then((res) => {
+        const arr = [];
+        res.forEach((album) => {
+          const obj = {
+            id: album.id,
+            name: album.title,
+          };
+          arr.push(obj);
+        });
+        setAlbumList(arr);
+      });
+  }, [userId]);
 
-    return (
-        <>
-            <div className="albumList">
-                <ul>
-                    {albumList.map(album => (
-                        <li key={album.id}>
-                            <p>{album.name}</p>
-                            <div onClick={() => {setCurrentAlbumId(album.id)}}>
-                                <Link to={`/${userId}/albums/${album.id}`}>Photos</Link>
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+  return (
+    <>
+      <div className="albumList">
+        <ul>
+          {albumList.map((album) => (
+            <li key={album.id}>
+              <p>{album.name}</p>
+              <div
+                onClick={() => {
+                  setCurrentAlbumId(album.id);
+                }}
+              >
+                <Link to={`/${userId}/albums/${album.id}`}>Photos</Link>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-            {/* <div className="photos">
+      {/* <div className="photos">
                 <Switch>
                     <Route path={`/${userId}/albums/${currentAlbumId}`}>
                         <Photos albumId={currentAlbumId}/>
@@ -54,10 +59,8 @@ const Albums = () => {
                     </Route>
                 </Switch>
             </div> */}
-        </>
-    );
-}
+    </>
+  );
+};
 
 export default Albums;
-
-
