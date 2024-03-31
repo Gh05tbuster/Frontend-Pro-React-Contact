@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Users = ({ updateCurrentUserId }) => {
+const Users = () => {
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
@@ -21,24 +21,16 @@ const Users = ({ updateCurrentUserId }) => {
   }, []);
 
   return (
-    <>
-      <div className="userList">
-        <Link to="/">Back</Link>
-        <ul>
-          {userList.map((user) => (
-            <li key={user.id}>
-              <p>{user.name}</p>
-              <Link
-                to={`/${user.id}/albums`}
-                onClick={() => updateCurrentUserId(user.id)}
-              >
-                Albums
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
+    <div className="userList">
+      <ul>
+        {userList.map((user) => (
+          <li key={user.id}>
+            <p>{user.name}</p>
+            <Link to={`/${user.id}/albums`}>Albums</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

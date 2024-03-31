@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  Link,
-  useParams,
-} from "react-router-dom";
-import Photos from "../Photos/Photos";
+import { Link, useParams } from "react-router-dom";
 
 const Albums = () => {
   const { userId } = useParams();
 
   const [albumList, setAlbumList] = useState([]);
-  const [currentAlbumId, setCurrentAlbumId] = useState(0);
 
   useEffect(() => {
     fetch(`https://jsonplaceholder.typicode.com/albums?userId=${userId}`)
@@ -31,35 +23,16 @@ const Albums = () => {
   }, [userId]);
 
   return (
-    <>
-      <div className="albumList">
-        <ul>
-          {albumList.map((album) => (
-            <li key={album.id}>
-              <p>{album.name}</p>
-              <div
-                onClick={() => {
-                  setCurrentAlbumId(album.id);
-                }}
-              >
-                <Link to={`/${userId}/albums/${album.id}`}>Photos</Link>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* <div className="photos">
-                <Switch>
-                    <Route path={`/${userId}/albums/${currentAlbumId}`}>
-                        <Photos albumId={currentAlbumId}/>
-                    </Route>
-
-                    <Route Route path='/'>
-                    </Route>
-                </Switch>
-            </div> */}
-    </>
+    <div className="albumList">
+      <ul>
+        {albumList.map((album) => (
+          <li key={album.id}>
+            <p>{album.name}</p>
+            <Link to={`/${userId}/albums/${album.id}`}>Photos</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

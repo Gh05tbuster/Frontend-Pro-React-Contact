@@ -23,26 +23,10 @@ const UserDashboard = () => {
   return (
     <>
       <Routes>
-        {/* <Route path="/users">
-          <Users updateCurrentUserId={updateCurrentUserId} />
-        </Route>
-        <Route path={`/${currentUserId}/albums`}>
-          <Albums />
-        </Route>
-        <Route path="/photos/:albumId">
-          <Photos />
-        </Route> */}
-
-        <Route
-          path="/users"
-          element={<Users updateCurrentUserId={updateCurrentUserId} />}
-        />
+        <Route path="/users" element={<Users />} />
         <Route path="/:userId/albums" element={<Albums />} />
-        <Route path="/:albumId/photos" element={<Photos />} />
+        <Route path="/:userId/albums/:albumId" element={<Photos />} />
         <Route path="/" element={<Users />} />
-        {/* <Route path="/">
-          <Users />
-        </Route> */}
       </Routes>
     </>
   );
