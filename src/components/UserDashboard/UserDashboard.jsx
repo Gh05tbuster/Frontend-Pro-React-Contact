@@ -5,21 +5,6 @@ import Albums from "../Albums/Albums";
 import Photos from "../Photos/Photos";
 
 const UserDashboard = () => {
-  const [currentUserId, setCurrentUserId] = useState(0);
-  const [isInit, setInit] = useState(false);
-
-  const updateCurrentUserId = (id) => {
-    setCurrentUserId(id);
-  };
-
-  useEffect(() => {
-    setInit(true);
-  }, []);
-
-  useEffect(() => {
-    if (isInit) console.log(currentUserId);
-  }, [currentUserId]);
-
   return (
     <>
       <Routes>
